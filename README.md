@@ -27,4 +27,3 @@ Please visit https://github.com/elasticsearch-dump/elasticsearch-dump for usage 
 ## License
 
 This work is licensed under the MIT license. See LICENSE file for details.
-

@@ -1,22 +1,18 @@
 ---
 - name: Check whether npm/nodejs installed
-  command: 'command -v npm >/dev/null 2>&1' 
+  ansible.builtin.stat:
+    path: /usr/bin/npm
   register: is_npm_installed
-  ignore_errors: yes
 
 - name: Install NPM package 
   ansible.builtin.package:
     name: npm
     state: present
-  when: is_npm_installed.rc != 0
+  when: is_npm_installed is defined
 
 - name: Install elasticdump
   ansible.builtin.command: npm install elasticdump -g
   register: result
-
-#- name: Debug install elasticdump
-#  ansible.builtin.debug:
-#    var: result
 
 - name: Make a symlink to /usr/bin location
   ansible.builtin.file:
