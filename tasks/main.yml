@@ -1,9 +1,14 @@
 ---
-- name: Install NPM package if it is not installed
+- name: Check whether npm/nodejs installed
+  command: 'which npm' 
+  register: npm_installed
+  ignore_errors: yes
+
+- name: Install NPM package 
   ansible.builtin.package:
     name: npm
     state: present
-  when: "'npm' not in ansible_facts.packages"
+  when: npm_installed.rc != 0
 
 - name: Install elasticdump
   ansible.builtin.command: npm install elasticdump -g
