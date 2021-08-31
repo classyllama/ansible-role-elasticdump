@@ -1,0 +1,14 @@
+---
+- name: Install NPM package if it is not installed
+  ansible.builtin.package:
+    name: npm
+    state: present
+  when: "'npm' not in ansible_facts.packages"
+
+- name: Install elasticdump
+  ansible.builtin.command: npm install elasticdump -g
+  register: result
+
+- name: Debug install elasticdump
+  ansible.builtin.debug:
+    var: result
