@@ -12,3 +12,9 @@
 - name: Debug install elasticdump
   ansible.builtin.debug:
     var: result
+
+- name: Make a symlink to /usr/bin location
+  ansible.builtin.file:
+    src: /usr/local/bin/elasticdump
+    dest: /usr/bin/elasticdump
+    state: link
