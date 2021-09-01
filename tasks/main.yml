@@ -8,14 +8,20 @@
   ansible.builtin.package:
     name: npm
     state: present
-  when: is_npm_installed is defined
+  when: is_npm_installed.stat.islnk is not defined
+
+- name: Check whether elasticdump installed
+  ansible.builtin.stat:
+    path: /usr/local/bin/elasticdump
+  register: is_elasticdump_installed
 
 - name: Install elasticdump
   ansible.builtin.command: npm install elasticdump -g
-  register: result
+  when: is_elasticdump_installed.stat.islnk is not defined
 
 - name: Make a symlink to /usr/bin location
   ansible.builtin.file:
     src: /usr/local/bin/elasticdump
     dest: /usr/bin/elasticdump
     state: link
+  when: not ansible_check_mode
