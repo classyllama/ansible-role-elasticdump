@@ -1,15 +1,4 @@
 ---
-- name: Check whether npm/nodejs installed
-  ansible.builtin.stat:
-    path: /usr/bin/npm
-  register: is_npm_installed
-
-- name: Install NPM package 
-  ansible.builtin.package:
-    name: npm
-    state: present
-  when: is_npm_installed.stat.islnk is not defined
-
 - name: Check whether elasticdump installed
   ansible.builtin.stat:
     path: /usr/local/bin/elasticdump

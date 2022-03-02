@@ -1,10 +1,10 @@
 # Ansible Role: ElasticDump utility
 
-Installs 'elasticdump' utility for dumping/restoring ElasticSearch indices
+Installs 'elasticdump' utility for dumping/restoring ElasticSearch indices. It requires nodejs installed on the server.
 
 ## Requirements
 
-None.
+    use_classyllama_repo_nodesource: true
 
 ## Role Variables
 
@@ -12,7 +12,7 @@ None.
 
 ## Dependencies
 
-None.
+     - { role: classyllama.repo-nodesource, tags: nodejs, when: use_classyllama_repo_nodesource | default(false) }
 
 ## Example Playbook
 
