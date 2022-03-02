@@ -7,10 +7,3 @@
 - name: Install elasticdump
   ansible.builtin.command: npm install elasticdump -g
   when: is_elasticdump_installed.stat.islnk is not defined
-
-- name: Make a symlink to /usr/bin location
-  ansible.builtin.file:
-    src: /usr/local/bin/elasticdump
-    dest: /usr/bin/elasticdump
-    state: link
-  when: not ansible_check_mode
