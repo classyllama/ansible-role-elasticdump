@@ -1,7 +1,7 @@
 ---
 - name: Check whether elasticdump installed
   ansible.builtin.stat:
-    path: /usr/local/bin/elasticdump
+    path: /usr/bin/elasticdump
   register: is_elasticdump_installed
 
 - name: Install elasticdump
